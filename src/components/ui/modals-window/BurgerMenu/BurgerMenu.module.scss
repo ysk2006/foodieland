@@ -1,0 +1,75 @@
+.burger {
+  padding: 20px;
+  &__wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+  }
+
+  &__background {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    animation: backdropFade 0.25s ease-out;
+  }
+
+  &__main {
+    position: absolute;
+    inset: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+    border-radius: 30px;
+    overflow: hidden;
+    animation: modalDrop 0.3s ease-out;
+
+    &--header {
+      display: flex;
+      justify-content: end;
+      padding: 15px;
+    }
+  }
+
+  &__link {
+    font-size: 35px;
+    text-decoration: none;
+    color: black;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.burger__description {
+  margin-top: auto;
+  padding: 20px;
+  font-size: 12px;
+  opacity: 0.2;
+  display: flex;
+  text-align: left;
+}
+
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

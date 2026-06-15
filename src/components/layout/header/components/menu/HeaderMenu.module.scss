@@ -1,0 +1,40 @@
+@use "@/styles/mixin" as *;
+
+$gap-desltop: 60px;
+$gap-table: 20px;
+
+.header__menu {
+  &--list {
+    display: flex;
+    align-items: center;
+    gap: $gap-desltop;
+
+    @include responsive("table") {
+      gap: $gap-table;
+    }
+
+    @include responsive("mobile") {
+      display: none;
+      overflow: hidden;
+      visibility: hidden;
+    }
+  }
+
+  &--item {
+    list-style-type: none;
+
+    a {
+      text-decoration: none;
+      color: #000;
+      transition: opacity 0.3s;
+    }
+  }
+
+  &--pending {
+    opacity: 0.7;
+  }
+
+  &--active {
+    opacity: 0.5;
+  }
+}

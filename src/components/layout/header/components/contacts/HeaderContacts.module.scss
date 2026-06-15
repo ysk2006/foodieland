@@ -1,0 +1,30 @@
+@use "@/styles/mixin" as *;
+
+$gap-desktop: 40px;
+$gap-table: 20px;
+
+.header__contacts {
+  display: flex;
+  align-items: center;
+  gap: $gap-desktop;
+
+  a {
+    transition: 0.1s ease-in-out;
+    opacity: 1;
+    display: block;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  @include responsive("table") {
+    gap: $gap-table;
+  }
+
+  @include responsive("mobile") {
+    display: none;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}

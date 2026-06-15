@@ -1,0 +1,42 @@
+@use "@/styles/mixin" as *;
+@use "@/styles/vars" as *;
+
+.header {
+  padding-block: 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+
+  @include responsive("table") {
+    margin-bottom: 20px;
+  }
+
+  @include responsive("mobile") {
+    padding-block: 20px;
+  }
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &--burger {
+    display: none;
+    overflow: hidden;
+    visibility: hidden;
+
+    @include responsive("mobile") {
+      display: flex;
+      overflow: auto;
+      visibility: visible;
+      border-radius: 15px;
+      padding: 10px;
+
+      transition: 0.1s ease-in-out;
+
+      &:active {
+        background-color: var(--gray-color);
+      }
+    }
+  }
+}
