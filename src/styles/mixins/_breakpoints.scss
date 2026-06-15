@@ -1,0 +1,37 @@
+@use "sass:map";
+
+$breakpoints: (
+  "big-desktop": 1440px,
+  "table": 768px,
+  "mobile": 576px,
+);
+
+@mixin responsive($breakpoint) {
+  $value: map.get($breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn ("Задан неизвестный брейкпоинт #{$breakpoint}");
+  }
+}
+
+@mixin big-desktop {
+  @include responsive("big-desktop") {
+    @content;
+  }
+}
+
+@mixin table {
+  @include responsive("table") {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @include responsive("mobile") {
+    @content;
+  }
+}
