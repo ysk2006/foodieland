@@ -1,0 +1,32 @@
+@use "@/styles/vars.scss" as *;
+@use "@/styles/mixin.scss" as *;
+
+.type__wrapper {
+  border-radius: 999px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 20px;
+  background-color: var(--white-color);
+  margin-bottom: 32px;
+
+  @include responsive("table") {
+    margin-bottom: 15px;
+  }
+
+  @include responsive("mobile") {
+    padding: 10px;
+    gap: 5px;
+  }
+
+  .type__title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -2%;
+
+    @include responsive("mobile") {
+      letter-spacing: 0%;
+    }
+  }
+}
