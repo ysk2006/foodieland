@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { clsx } from "clsx";
 
@@ -8,7 +9,7 @@ import { defaultBanners } from "@/context/banners";
 import styles from "./Hero.module.scss";
 
 const AUTOPLAY_DELAY = 5000;
-const SLIDE_WIDTH = 1280; // В пикселях вместо процентов
+const SLIDE_WIDTH = 1280;
 const SLIDE_GAP = 24;
 
 function createInfiniteSlides(items) {
@@ -16,22 +17,74 @@ function createInfiniteSlides(items) {
   return [items[items.length - 1], ...items, items[0]];
 }
 
+const MemoizedBanner = React.memo(DefaultBanner);
+
 function Hero() {
   const slides = useMemo(() => createInfiniteSlides(defaultBanners), []);
   const [slideIndex, setSlideIndex] = useState(1);
   const [enableTransition, setEnableTransition] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isPageVisible, setIsPageVisible] = useState(true);
+
+  const autoplayRef = useRef(null);
+  const transitionRef = useRef(false);
+  const slidesLengthRef = useRef(slides.length);
+
+  useEffect(() => {
+    slidesLengthRef.current = slides.length;
+  }, [slides.length]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      const isVisible = document.visibilityState === "visible";
+      setIsPageVisible(isVisible);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  const resetAutoplay = useCallback(() => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+
+    if (!isPageVisible || isHovering) {
+      return;
+    }
+
+    autoplayRef.current = setInterval(() => {
+      setSlideIndex((prevIndex) => {
+        let nextIndex = prevIndex + 1;
+        if (nextIndex >= slidesLengthRef.current - 1) {
+          return slidesLengthRef.current - 1;
+        }
+        return nextIndex;
+      });
+    }, AUTOPLAY_DELAY);
+  }, [isPageVisible, isHovering]);
 
   const goNext = useCallback(() => {
+    if (transitionRef.current) return;
+    transitionRef.current = true;
     setEnableTransition(true);
-    setSlideIndex((index) => index + 1);
-  }, []);
+    setSlideIndex((prevIndex) => prevIndex + 1);
+    resetAutoplay();
+  }, [resetAutoplay]);
 
   const goPrev = useCallback(() => {
+    if (transitionRef.current) return;
+    transitionRef.current = true;
     setEnableTransition(true);
-    setSlideIndex((index) => index - 1);
-  }, []);
+    setSlideIndex((prevIndex) => prevIndex - 1);
+    resetAutoplay();
+  }, [resetAutoplay]);
 
   const handleTransitionEnd = useCallback(() => {
+    transitionRef.current = false;
+
     const resetTransition = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setEnableTransition(true));
@@ -50,11 +103,23 @@ function Hero() {
   }, [slideIndex, slides.length]);
 
   useEffect(() => {
-    const timer = setInterval(goNext, AUTOPLAY_DELAY);
-    return () => clearInterval(timer);
-  }, [goNext]);
+    if (!isPageVisible || isHovering) {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+        autoplayRef.current = null;
+      }
+    } else {
+      resetAutoplay();
+    }
 
-  // Пересчёт трансформации с использованием пикселей
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+        autoplayRef.current = null;
+      }
+    };
+  }, [isPageVisible, isHovering, resetAutoplay]);
+
   const trackStyle = {
     transform: `translateX(calc(-${slideIndex} * (${SLIDE_WIDTH}px + ${SLIDE_GAP}px)))`,
   };
@@ -72,8 +137,11 @@ function Hero() {
             <ChevronLeft size={24} />
           </button>
         </div>
-
-        <div className={styles.viewport}>
+        <div
+          className={styles.viewport}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <div
             className={clsx(
               styles.track,
@@ -90,12 +158,12 @@ function Hero() {
                   index === slideIndex && styles.slideActive,
                 )}
               >
-                <DefaultBanner {...banner} isActive={index === slideIndex} />
+                <div className={styles.slideOverlay} />
+                <MemoizedBanner {...banner} isActive={index === slideIndex} />
               </div>
             ))}
           </div>
         </div>
-
         <div className={clsx(styles.hoverZone, styles.hoverZoneRight)}>
           <button
             type="button"
