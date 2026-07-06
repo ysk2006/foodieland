@@ -1,0 +1,44 @@
+@use "@/styles/vars.scss" as *;
+@use "@/styles/mixin.scss" as *;
+
+.category {
+    .category__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 80px;
+
+        @include responsive("table") {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 48px;
+            letter-spacing: -4%;
+            font-weight: 600;
+        }
+
+        .category__link {
+            background-color: var(--blue-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -2%;
+            padding: 21px 27px;
+            border-radius: 16px;
+            color: var(--black-color);
+
+            @include responsive("table") {
+                padding: 10px;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .category__body {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+}
