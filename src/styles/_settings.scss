@@ -4,44 +4,44 @@
 
 html,
 body {
-  font-family: var(--font);
-  font-weight: 400;
-  font-size: var(--font-size-default);
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: var(--font-size-default);
 }
 
 button {
-  background-color: transparent;
-  border: none;
-  outline: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 ul {
-  li {
-    a {
-      text-decoration: none;
-      color: var(--black-color);
-      opacity: 1;
-      transition: opacity 0.1s ease-in;
+    li {
+        a {
+            text-decoration: none;
+            color: var(--black-color);
+            opacity: 1;
+            transition: opacity 0.1s ease-in;
 
-      &:hover {
-        opacity: 0.5;
-      }
+            &:hover {
+                opacity: 0.5;
+            }
+        }
     }
-  }
 }
 
 body {
-  background-color: var(--white-color);
-  color: var(--black-color);
+    background-color: var(--white-color);
+    color: var(--black-color);
 }
 
 .container {
-  max-width: var(--container-width);
-  padding-inline: 20px;
-  width: 100%;
-  margin: 0 auto;
+    max-width: var(--container-width);
+    padding-inline: 20px;
+    width: 100%;
+    margin: 0 auto;
 
-  @include responsive("table") {
-    padding-inline: var(--container-padding);
-  }
+    @include responsive("table") {
+        padding-inline: var(--container-padding);
+    }
 }
