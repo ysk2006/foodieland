@@ -2,143 +2,148 @@
 @use "@/styles/mixin" as *;
 
 .hero {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 160px;
+
+    @include responsive("table") {
+        margin-bottom: 60px;
+    }
 }
 
 .slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .viewport {
-  overflow: hidden;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  contain: layout style paint;
-  content-visibility: auto;
+    overflow: hidden;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    contain: layout style paint;
+    content-visibility: auto;
 }
 
 .track {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 0 calc((100vw - 1280px) / 2);
-  will-change: transform;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform-origin: center;
-  -webkit-font-smoothing: antialiased;
-  -webkit-backface-visibility: hidden;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 calc((100vw - 1280px) / 2);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-origin: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &.noTransition {
-    transition: none;
-  }
+    &.noTransition {
+        transition: none;
+    }
 }
 
 .slide {
-  flex: 0 0 1280px;
-  opacity: 0.85;
-  border-radius: 50px;
-  overflow: hidden;
-  pointer-events: none;
-  position: relative;
-  contain: layout style paint;
-  will-change: opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
+    flex: 0 0 1280px;
+    opacity: 0.85;
+    border-radius: 50px;
+    overflow: hidden;
+    pointer-events: none;
+    position: relative;
+    contain: layout style paint;
+    will-change: opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
 
-  &.slideActive {
-    opacity: 1;
-    pointer-events: auto;
+    &.slideActive {
+        opacity: 1;
+        pointer-events: auto;
 
-    .slideOverlay {
-      opacity: 0;
-      background-color: transparent;
-      pointer-events: none;
+        .slideOverlay {
+            opacity: 0;
+            background-color: transparent;
+            pointer-events: none;
+        }
     }
-  }
 }
 
 .slideOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background-color: rgba(231, 250, 254, 0.4);
-  background-color: var(--blue-color);
-  transition:
-    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-  will-change: opacity, backdrop-filter;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background-color: rgba(231, 250, 254, 0.4);
+    background-color: var(--blue-color);
+    transition:
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    will-change: opacity, backdrop-filter;
 }
 
 .hoverZone {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: calc((100vw - 1280px) / 2);
-  z-index: 20;
-  display: flex;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - 1280px) / 2);
+    z-index: 20;
+    display: flex;
+    align-items: center;
 
-  &:hover .navButton {
-    opacity: 1;
-    visibility: visible;
-  }
+    &:hover .navButton {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 .hoverZoneLeft {
-  left: 0;
-  justify-content: flex-start;
-  padding-left: 24px;
+    left: 0;
+    justify-content: flex-start;
+    padding-left: 24px;
 }
 
 .hoverZoneRight {
-  right: 0;
-  justify-content: flex-end;
-  padding-right: 24px;
+    right: 0;
+    justify-content: flex-end;
+    padding-right: 24px;
 }
 
 .navButton {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--white-color);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  will-change: opacity, visibility;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition:
-    opacity 0.2s ease,
-    visibility 0.2s ease,
-    transform 0.2s ease;
-  color: var(--black-color);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--white-color);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity, visibility;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+    color: var(--black-color);
 
-  @include responsive("table") {
-    width: 30px;
-    height: 30px;
-  }
+    @include responsive("table") {
+        width: 30px;
+        height: 30px;
+    }
 
-  @include responsive("mobile") {
-    opacity: 1;
-    visibility: visible;
-    width: 40px;
-    height: 40px;
-  }
+    @include responsive("mobile") {
+        opacity: 1;
+        visibility: visible;
+        width: 40px;
+        height: 40px;
+    }
 }
