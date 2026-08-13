@@ -1,0 +1,179 @@
+@use "@/styles/mixin.scss" as *;
+
+.page {
+    padding-bottom: 40px;
+}
+
+.hero {
+    max-width: 720px;
+    margin: 0 auto 64px;
+    text-align: center;
+
+    h1 {
+        font-size: 64px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 110%;
+        margin-bottom: 24px;
+
+        @include responsive("mobile") {
+            font-size: 36px;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 160%;
+        color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 64px;
+
+    @include responsive("table") {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 40px;
+    }
+}
+
+.photo {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    border-radius: 30px;
+
+    @include responsive("table") {
+        height: 320px;
+    }
+
+    @include responsive("mobile") {
+        height: 240px;
+        border-radius: 20px;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        outline: none;
+        background: var(--white-color);
+        border-radius: 16px;
+        padding: 18px 20px;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--black-color);
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: rgba(0, 0, 0, 0.35);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 160px;
+    }
+
+    button {
+        align-self: flex-start;
+
+        @include responsive("mobile") {
+            width: 100%;
+        }
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @include responsive("mobile") {
+        grid-template-columns: 1fr;
+    }
+}
+
+.success {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 150%;
+    align-self: center;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+
+    @include responsive("table") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include responsive("mobile") {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--blue-color);
+    border-radius: 24px;
+    padding: 24px;
+
+    span {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--white-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    small {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.5;
+        margin-bottom: 4px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 140%;
+    }
+}

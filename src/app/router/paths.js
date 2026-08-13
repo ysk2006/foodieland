@@ -5,6 +5,7 @@ export const PATHS = {
   BLOG: "/blog",
   BLOG_POST: "/blog/:postId",
   CONTACTS: "/contacts",
+  ABOUT: "/about",
   NOT_FOUND: "*",
 };
 

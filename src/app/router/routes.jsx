@@ -9,6 +9,7 @@ const RecipePage = lazy(() => import("@/pages/recipe/RecipePage"));
 const BlogPage = lazy(() => import("@/pages/blog/BlogPage"));
 const BlogPostPage = lazy(() => import("@/pages/blog-post/BlogPostPage"));
 const ContactsPage = lazy(() => import("@/pages/contacts/ContactsPage"));
+const AboutPage = lazy(() => import("@/pages/about/AboutPage"));
 const NotFoundPage = lazy(() => import("@/pages/not-found/NotFoundPage"));
 
 export const routes = [
@@ -39,6 +40,10 @@ export const routes = [
       {
         path: PATHS.CONTACTS,
         element: <ContactsPage />,
+      },
+      {
+        path: PATHS.ABOUT,
+        element: <AboutPage />,
       },
       {
         path: PATHS.NOT_FOUND,

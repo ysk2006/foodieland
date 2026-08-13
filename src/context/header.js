@@ -48,7 +48,7 @@ const HeaderNavList = [
   {
     id: 4,
     name: "About us",
-    link: "/about",
+    link: PATHS.ABOUT,
   },
 ];
 

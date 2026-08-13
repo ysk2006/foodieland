@@ -2,12 +2,15 @@ import RecipeCard from "@/components/ui/cards/recipe-card/RecipeCard";
 
 import styles from "./RecipeRelated.module.scss";
 
-function RecipeRelated({ recipes }) {
+function RecipeRelated({
+    recipes,
+    title = "You may like these recipe too",
+}) {
     if (!recipes?.length) return null;
 
     return (
         <section className={styles.section}>
-            <h2>You may like these recipe too</h2>
+            <h2>{title}</h2>
             <div className={styles.grid}>
                 {recipes.map((recipe) => (
                     <RecipeCard
