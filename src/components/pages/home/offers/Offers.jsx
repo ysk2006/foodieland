@@ -1,4 +1,4 @@
-import { mockRecipeCards } from "@/data/mockRecipeCards";
+import { getRecipeCards } from "@/data/mockRecipe";
 import RecipeCard from "@/components/ui/cards/recipe-card/RecipeCard";
 
 import styles from "./Offers.module.scss";
@@ -19,7 +19,7 @@ function Offers() {
                 </p>
             </div>
             <div className={styles.offers__grid}>
-                {[...mockRecipeCards].reverse().map((recipe) => (
+                {getRecipeCards().slice(-4).map((recipe) => (
                     <RecipeCard
                         key={recipe.id}
                         id={recipe.id}

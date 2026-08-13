@@ -1,10 +1,15 @@
 import { Link } from "react-router";
 
+import { PATHS } from "@/app/router/paths";
+
 import styles from "./CategoryCard.module.scss";
 
-function CategoryCard({ id, name, image }) {
+function CategoryCard({ name, image }) {
     return (
-        <Link to={"/"} className={styles.category__card} key={id}>
+        <Link
+            to={`${PATHS.RECIPES}?category=${encodeURIComponent(name)}`}
+            className={styles.category__card}
+        >
             <div className={styles.category__imageWrapper}>
                 <img
                     className={styles.category__image}

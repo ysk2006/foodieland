@@ -1,4 +1,4 @@
-import { mockRecipeCards } from "@/data/mockRecipeCards";
+import { getRecipeCards } from "@/data/mockRecipe";
 import RecipeCard from "@/components/ui/cards/recipe-card/RecipeCard";
 
 import styles from "./Recipes.module.scss";
@@ -19,7 +19,7 @@ function Recipes() {
                 </div>
             </div>
             <div className={styles.recipes__wrapper}>
-                {mockRecipeCards.map((recipe) => (
+                {getRecipeCards(9).map((recipe) => (
                     <RecipeCard
                         key={recipe.id}
                         id={recipe.id}

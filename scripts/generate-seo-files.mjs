@@ -7,6 +7,7 @@ const routes = [
   { path: "/", changefreq: "daily", priority: "1.0" },
   { path: "/recipes", changefreq: "weekly", priority: "0.8" },
   { path: "/blog", changefreq: "weekly", priority: "0.8" },
+  { path: "/contacts", changefreq: "monthly", priority: "0.5" },
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
