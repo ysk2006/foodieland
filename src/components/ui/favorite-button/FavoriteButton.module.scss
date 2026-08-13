@@ -1,0 +1,35 @@
+@use "@/styles/vars.scss" as *;
+
+.favorite {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--black-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+    }
+
+    &:hover {
+        transform: scale(1.06);
+    }
+
+    &:active {
+        transform: scale(0.96);
+    }
+
+    &.active {
+        color: #ff6363;
+    }
+}
