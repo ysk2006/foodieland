@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import Logo from "@/assets/logo.svg";
+import { PATHS } from "@/app/router/paths";
 
 import styles from "./HeaderLogo.module.scss";
 
@@ -21,7 +22,7 @@ const IsHeaderHaveLogo = ({ logo, text = "undefiend" }) => {
 
 function HeaderLogo() {
   return (
-    <Link className={styles.header__logo}>
+    <Link to={PATHS.HOME} className={styles.header__logo}>
       <IsHeaderHaveLogo logo={Logo} text="Foodieland" />
     </Link>
   );
