@@ -1,0 +1,184 @@
+@use "@/styles/mixin.scss" as *;
+
+.newsletter {
+    margin-top: 160px;
+
+    @include responsive("table") {
+        margin-top: 80px;
+    }
+
+    &__banner {
+        position: relative;
+        overflow: hidden;
+        background-color: var(--blue-color);
+        border-radius: 60px;
+        padding: 80px 24px 100px;
+        min-height: 442px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include responsive("table") {
+            border-radius: 30px;
+            padding: 48px 20px 64px;
+            min-height: auto;
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 1;
+        max-width: 620px;
+        margin: 0 auto;
+        text-align: center;
+
+        h2 {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -4%;
+            line-height: 120%;
+            margin-bottom: 24px;
+
+            @include responsive("mobile") {
+                font-size: 32px;
+            }
+        }
+
+        p.newsletter__lead,
+        .newsletter__lead {
+            font-size: 16px;
+            opacity: 60%;
+            margin-bottom: 64px;
+
+            @include responsive("table") {
+                margin-bottom: 32px;
+            }
+        }
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--white-color);
+        border-radius: 24px;
+        padding: 10px 10px 10px 32px;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+
+        @include responsive("mobile") {
+            flex-direction: column;
+            padding: 12px;
+            border-radius: 20px;
+        }
+
+        input {
+            flex: 1;
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 16px;
+            color: var(--black-color);
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        button {
+            flex-shrink: 0;
+
+            @include responsive("mobile") {
+                width: 100%;
+            }
+        }
+    }
+
+    &__success {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--black-color);
+    }
+
+    &__deco--vegan {
+        position: absolute;
+        left: -40px;
+        bottom: -30px;
+        width: 280px;
+        pointer-events: none;
+        user-select: none;
+
+        @include responsive("table") {
+            width: 160px;
+            left: -20px;
+            bottom: -20px;
+        }
+
+        @include responsive("mobile") {
+            display: none;
+        }
+    }
+
+    &__deco--dessert {
+        position: absolute;
+        right: -20px;
+        bottom: -40px;
+        width: 220px;
+        pointer-events: none;
+        user-select: none;
+
+        @include responsive("table") {
+            width: 130px;
+            right: -10px;
+            bottom: -24px;
+        }
+
+        @include responsive("mobile") {
+            display: none;
+        }
+    }
+
+    &__deco--chocolate {
+        position: absolute;
+        left: 80px;
+        top: 20px;
+        width: 90px;
+        transform: rotate(-18deg);
+        pointer-events: none;
+        user-select: none;
+
+        @include responsive("table") {
+            width: 56px;
+            left: 16px;
+            top: 12px;
+        }
+
+        @include responsive("mobile") {
+            display: none;
+        }
+    }
+
+    &__deco--lunch {
+        position: absolute;
+        right: 90px;
+        top: 30px;
+        width: 110px;
+        transform: rotate(16deg);
+        pointer-events: none;
+        user-select: none;
+
+        @include responsive("table") {
+            width: 64px;
+            right: 16px;
+            top: 16px;
+        }
+
+        @include responsive("mobile") {
+            display: none;
+        }
+    }
+}
