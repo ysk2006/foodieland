@@ -1,0 +1,116 @@
+@use "@/styles/mixin.scss" as *;
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 48px;
+
+    @include responsive("table") {
+        flex-direction: column;
+        margin-bottom: 32px;
+    }
+}
+
+.main {
+    min-width: 0;
+    flex: 1;
+
+    h1 {
+        font-size: 64px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 110%;
+        margin-bottom: 32px;
+
+        @include responsive("table") {
+            font-size: 40px;
+        }
+
+        @include responsive("mobile") {
+            font-size: 32px;
+        }
+    }
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 24px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+    svg {
+        flex-shrink: 0;
+    }
+
+    span {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 4px;
+    }
+
+    strong {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+    @include responsive("mobile") {
+        padding-left: 0;
+        border-left: none;
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-shrink: 0;
+
+    button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: var(--black-color);
+    }
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--blue-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include responsive("mobile") {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media print {
+    .actions {
+        display: none;
+    }
+}

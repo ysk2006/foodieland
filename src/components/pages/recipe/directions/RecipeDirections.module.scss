@@ -1,0 +1,21 @@
+@use "@/styles/mixin.scss" as *;
+
+.section {
+    margin-top: 80px;
+    max-width: 840px;
+
+    @include responsive("table") {
+        margin-top: 48px;
+    }
+
+    h2 {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 24px;
+
+        @include responsive("mobile") {
+            font-size: 28px;
+        }
+    }
+}

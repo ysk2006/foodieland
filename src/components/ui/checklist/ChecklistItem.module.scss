@@ -1,0 +1,107 @@
+@use "@/styles/mixin.scss" as *;
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    user-select: none;
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.box {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    background: var(--white-color);
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border-radius: 50%;
+        background: var(--black-color);
+        opacity: 0;
+        transform: scale(0.6);
+    }
+}
+
+.checked {
+    .box {
+        border-color: var(--black-color);
+        background: var(--black-color);
+
+        &::after {
+            opacity: 1;
+            background: var(--white-color);
+            inset: 8px;
+        }
+    }
+
+    .label {
+        text-decoration: line-through;
+        opacity: 0.45;
+    }
+
+    .description {
+        opacity: 0.4;
+    }
+}
+
+.body {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 0;
+    flex: 1;
+}
+
+.index {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    flex: 1;
+}
+
+.label {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 140%;
+
+    @include responsive("mobile") {
+        font-size: 16px;
+    }
+}
+
+.description {
+    font-size: 16px;
+    line-height: 160%;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+}

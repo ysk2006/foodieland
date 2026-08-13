@@ -1,0 +1,55 @@
+@use "@/styles/mixin.scss" as *;
+
+.section {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 64px;
+    margin-top: 80px;
+
+    @include responsive("table") {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-top: 48px;
+    }
+}
+
+.main {
+    min-width: 0;
+
+    h2 {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 32px;
+
+        @include responsive("mobile") {
+            font-size: 28px;
+        }
+    }
+}
+
+.group {
+    margin-bottom: 32px;
+
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+    }
+}
+
+.aside {
+    h3 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 32px;
+    }
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
