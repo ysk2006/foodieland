@@ -1,42 +1,120 @@
-import { Link } from "react-router";
+import { useCallback, useMemo } from "react";
+import { useSearchParams } from "react-router";
 
 import SEO from "@/components/SEO";
-import AuthorInfo from "@/components/author/AuthorInfo";
-import { PATHS, getRecipePath } from "@/app/router/paths";
-import { getRecipeById, mockRecipes } from "@/data/mockRecipes";
+import CatalogHero from "@/components/ui/catalog-hero/CatalogHero";
+import FilterChips from "@/components/ui/filter-chips/FilterChips";
+import Pagination from "@/components/ui/pagination/Pagination";
+import RecipeCard from "@/components/ui/cards/recipe-card/RecipeCard";
+import Newsletter from "@/components/pages/home/newsletter/Newsletter";
+import { PATHS } from "@/app/router/paths";
+import {
+    getRecipeCards,
+    getRecipeCategories,
+} from "@/data/mockRecipe";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import { usePagedList } from "@/hooks/usePagedList";
+
+import styles from "./RecipesPage.module.scss";
+
+const PAGE_SIZE = 9;
 
 function RecipesPage() {
-  const seo = usePageSEO({
-    title: "Рецепты",
-    description:
-      "Коллекция вкусных рецептов от Foodieland: простые блюда на каждый день и идеи для здорового питания",
-    path: PATHS.RECIPES,
-    image: "/og-image.jpg",
-    type: "website",
-  });
+    const seo = usePageSEO({
+        title: "Recipes",
+        description:
+            "Browse the Foodieland collection of simple, tasty recipes for every day.",
+        path: PATHS.RECIPES,
+        image: "/jpg/recipe-1.jpg",
+        type: "website",
+    });
 
-  const recipes = Object.keys(mockRecipes).map((id) => getRecipeById(id));
+    const recipes = useMemo(() => getRecipeCards(), []);
+    const categories = useMemo(() => getRecipeCategories(), []);
+    const [params, setParams] = useSearchParams();
 
-  return (
-    <>
-      <SEO {...seo} />
+    const query = params.get("q") ?? "";
+    const category = params.get("category") ?? "";
+    const page = Number(params.get("page") || 1);
 
-      <div className="recipes-page">
-        <h1>Рецепты</h1>
-        <p>Выберите рецепт из коллекции</p>
+    const updateParams = useCallback(
+        (next) => {
+            const updated = new URLSearchParams(params);
+            Object.entries(next).forEach(([key, value]) => {
+                if (value) updated.set(key, String(value));
+                else updated.delete(key);
+            });
+            setParams(updated, { replace: true });
+        },
+        [params, setParams],
+    );
 
-        <ul>
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <Link to={getRecipePath(recipe.id)}>{recipe.title}</Link>
-              <AuthorInfo author={recipe.author} date={recipe.date} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
-  );
+    const paged = usePagedList(recipes, {
+        page,
+        pageSize: PAGE_SIZE,
+        query,
+        category,
+        categoryKey: "category",
+    });
+
+    return (
+        <>
+            <SEO {...seo} />
+            <div className={styles.page}>
+                <CatalogHero
+                    title="Recipes"
+                    description="Find something delicious for breakfast, lunch or a slow weekend dinner. Filter by category or search by name."
+                    searchId="recipes-search"
+                    searchValue={query}
+                    onSearch={(value) =>
+                        updateParams({ q: value, page: 1, category })
+                    }
+                    placeholder="Search recipes..."
+                />
+
+                <div className={styles.filters}>
+                    <FilterChips
+                        items={categories}
+                        value={category}
+                        onChange={(value) =>
+                            updateParams({ category: value, page: 1, q: query })
+                        }
+                    />
+                </div>
+
+                {paged.items.length ? (
+                    <div className={styles.grid}>
+                        {paged.items.map((recipe) => (
+                            <RecipeCard
+                                key={recipe.id}
+                                id={recipe.id}
+                                title={recipe.title}
+                                time={recipe.time}
+                                image={recipe.image}
+                                category={recipe.category}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <p className={styles.empty}>No recipes match your search.</p>
+                )}
+
+                <Pagination
+                    page={paged.currentPage}
+                    totalPages={paged.totalPages}
+                    onPageChange={(nextPage) =>
+                        updateParams({
+                            page: nextPage > 1 ? nextPage : "",
+                            q: query,
+                            category,
+                        })
+                    }
+                />
+
+                <Newsletter />
+            </div>
+        </>
+    );
 }
 
 export default RecipesPage;

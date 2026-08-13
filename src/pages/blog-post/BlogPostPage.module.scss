@@ -1,0 +1,146 @@
+@use "@/styles/mixin.scss" as *;
+
+.page {
+    padding-bottom: 40px;
+}
+
+.header {
+    max-width: 780px;
+    margin: 0 auto 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+
+    h1 {
+        font-size: 56px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 115%;
+
+        @include responsive("mobile") {
+            font-size: 32px;
+        }
+    }
+}
+
+.hero {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-bottom: 64px;
+
+    @include responsive("table") {
+        height: 320px;
+        margin-bottom: 40px;
+    }
+
+    @include responsive("mobile") {
+        height: 220px;
+        border-radius: 20px;
+    }
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    align-items: start;
+
+    @include responsive("table") {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+.content {
+    h2 {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin: 32px 0 16px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 180%;
+        color: rgba(0, 0, 0, 0.72);
+        margin-bottom: 20px;
+    }
+}
+
+.aside {
+    h3 {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 24px;
+    }
+}
+
+.recipes {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.related {
+    margin-top: 80px;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin-bottom: 24px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+        a {
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            text-decoration: none;
+            color: var(--black-color);
+        }
+
+        span {
+            color: rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+        }
+    }
+}
+
+.back {
+    color: var(--black-color);
+    font-weight: 500;
+}
+
+.missing {
+    padding: 80px 0 120px;
+    text-align: center;
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 16px;
+    }
+
+    a {
+        color: var(--black-color);
+    }
+}

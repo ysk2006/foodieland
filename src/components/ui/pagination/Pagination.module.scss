@@ -1,0 +1,40 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 64px;
+    flex-wrap: wrap;
+}
+
+.page,
+.arrow {
+    min-width: 48px;
+    height: 48px;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: rgb(248, 247, 247);
+    color: var(--black-color);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+}
+
+.active {
+    background: var(--black-color);
+    color: var(--white-color);
+}
+
+.ellipsis {
+    min-width: 24px;
+    text-align: center;
+    opacity: 0.5;
+}

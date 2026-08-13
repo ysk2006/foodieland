@@ -1,0 +1,29 @@
+@use "@/styles/mixin.scss" as *;
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.chip {
+    padding: 12px 22px;
+    border-radius: 16px;
+    background: rgb(248, 247, 247);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    color: var(--black-color);
+
+    @include responsive("mobile") {
+        padding: 10px 16px;
+        border-radius: 12px;
+    }
+}
+
+.active {
+    background: var(--black-color);
+    color: var(--white-color);
+}
